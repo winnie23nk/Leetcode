@@ -1,16 +1,14 @@
 class Solution {
     public boolean divideArray(int[] nums) {
-        Arrays.sort(nums);
-       int i=0;
-       while(i<nums.length){
-        if(nums[i]==nums[i+1]){
-            i=i+2;
+       HashSet<Integer>set= new HashSet<>();
+       for(int i=0;i<nums.length;i++){
+        if(set.contains(nums[i])){
+            set.remove(nums[i]);
         }
         else{
-            return false;
+            set.add(nums[i]);
         }
        }
-       return true;
-        
+       return set.isEmpty();
     }
 }
