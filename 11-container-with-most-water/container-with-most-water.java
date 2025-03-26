@@ -4,7 +4,7 @@ class Solution {
         int right=height.length-1;
         int currmax=0;
         int max=0;
-        while(left<right){
+        while(left!=right){
             int min=Math.min(height[left],height[right]);
             int width=right-left;
             currmax=min*width;
