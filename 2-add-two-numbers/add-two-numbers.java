@@ -9,64 +9,45 @@
  * }
  */
 class Solution {
-    ListNode head;
-    public void add(int val){
-        ListNode newnode= new ListNode(val);
-        if(head==null){
-            head=newnode;
-            return;
-        }
-        ListNode temp=head;
-
-        while(temp.next!=null){
-            temp=temp.next;
-        }
-        temp.next=newnode;
-    }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-         Solution ll= new Solution();
-         int count1=0;
-         int count2=0;
-         ListNode temp1=l1;
-         ListNode temp2=l2;
-         
-         while(temp1!=null){
-            count1++;
-            temp1=temp1.next;
-         }
-         while(temp2!=null){
-            count2++;
-            temp2=temp2.next;
-         }
-
-    
+        ListNode dummy= new ListNode(-1);
+        ListNode curr=dummy;
+        int sum=0;
+        int carry=0;
         while(l1!=null||l2!=null){
-          int o1=(l1!=null)?l1.val:0;
-          int o2=(l2!=null)?l2.val:0;
-          int sum=o1+o2;
-            if(sum<10){
-                ll.add(sum);
+            sum=carry;
+            if(l1!=null){
+            sum+=l1.val;
             }
-            else{
-                ll.add(sum-10);
-                if(count1>=count2){
-                if(l1.next==null){
-                    ll.add(sum/10);
-                }else{
-                l1.next.val+=sum/10;
-                }
-                }
-                else{
-                  if(l2.next==null){
-                    ll.add(sum/10);
-                }else{
-                l2.next.val+=sum/10;
-                }  
-                }
+            if(l2!=null){
+            sum+=l2.val;
             }
-            if (l1 != null) l1 = l1.next;
-            if (l2 != null) l2 = l2.next;
+          
+
+            ListNode newnode=new ListNode(sum%10);
+            curr.next=newnode;
+            curr=curr.next;
+             carry=sum/10;
+           
+            if(l1!=null){
+                l1=l1.next;
+            }
+            if(l2!=null){
+                l2=l2.next;
+            }
+
+          
+
+
+
+
         }
-        return ll.head;
+        if(carry!=0){
+            ListNode newnode= new ListNode(carry);
+            curr.next=newnode;
+            curr=curr.next;
+        }
+        return dummy.next;
+        
     }
 }
