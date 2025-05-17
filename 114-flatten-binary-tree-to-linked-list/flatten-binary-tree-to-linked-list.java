@@ -14,30 +14,26 @@
  * }
  */
 class Solution {
-    ArrayList<TreeNode>arr=new ArrayList<>();
     public void flatten(TreeNode root) {
-        if(root==null){
-            return;
-        }
-        preorder(root);
-        for(int i=0;i<arr.size()-1;i++){
-            TreeNode curr=arr.get(i);
-            TreeNode next=arr.get(i+1);
-            curr.left=null;
-            curr.right=next;
+        if(root==null) return;
+         TreeNode prev=root;
+        while(prev!=null){
+            if(prev.left!=null){
+                TreeNode curr=prev.left;
+                while(curr.right!=null){
+                    curr=curr.right;
+                }
+                curr.right=prev.right;
+                prev.right=prev.left;
+                prev.left=null;
+            
+            
+            }
+           
+            prev=prev.right;
             
         }
-    
+       
+        
     }
-
-
-    public void preorder(TreeNode root){
-        if(root==null){
-            return;
-        }
-        arr.add(root);
-        preorder(root.left);
-        preorder(root.right);
-    
-}
 }
