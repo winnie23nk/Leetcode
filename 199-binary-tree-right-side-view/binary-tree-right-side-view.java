@@ -16,52 +16,24 @@
 class Solution {
     List<Integer>arr=new ArrayList<>();
     Queue<TreeNode>q=new LinkedList<>();
-    List<Integer>res=new ArrayList<>();
     public List<Integer> rightSideView(TreeNode root) {
         if(root==null){
-            return res;
+            return arr;
         }
-
         q.add(root);
-        q.add(null);
         while(!q.isEmpty()){
-            TreeNode r=q.remove();
-            if(r==null){
-                arr.add(-101);
-            }else{
-            arr.add(r.val);
-            }
-            if(r==null){
-                if(q.isEmpty()){
-                    break;
-                }else{
-                    q.add(null);
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                TreeNode remove=q.poll();
+                if(i==size-1){
+                    arr.add(remove.val);
                 }
+                if(remove.left!=null) q.add(remove.left);
+                if(remove.right!=null) q.add(remove.right);
             }
-            else{
-                if(r.left!=null){
-                    q.add(r.left);
-                }
-                if(r.right!=null){
-                    q.add(r.right);
-                }
-            }
+
         }
-     
-
-        int i=0;
-        int j=-1;
-        while(i<arr.size()){
-            if(arr.get(i)==-101){
-                res.add(arr.get(j));
-            }
-            i++;
-            j++;
-            
-        }
-
-        return res;
-    
-
+        return arr;
+        
     }
 }
