@@ -18,34 +18,17 @@ class Solution {
         if(root==null){
             return true;
         }
-         if(righttree(root.right,root)&&lefttree(root.left,root)){
-            return isValidBST(root.left)&&isValidBST(root.right);
-         }
-
-        return false;
+        return valid(root,Long.MIN_VALUE,Long.MAX_VALUE);
+        
     }
-    public boolean righttree(TreeNode root,TreeNode megaroot){
+    public boolean valid(TreeNode root,long min, long max){
         if(root==null){
             return true;
         }
-        if(root.val<=megaroot.val){
+        if(min>=root.val||root.val>=max){
             return false;
         }
-        boolean left=righttree(root.left,megaroot);
-        boolean right=righttree(root.right,megaroot);
-        return left&&right;
-
-    }
-     public boolean lefttree(TreeNode root,TreeNode megaroot){
-        if(root==null){
-            return true;
-        }
-        if(root.val>=megaroot.val){
-            return false;
-        }
-        boolean left=lefttree(root.left,megaroot);
-        boolean right=lefttree(root.right,megaroot);
-        return left&&right;
+        return valid(root.left,min,root.val)&&valid(root.right,root.val,max);
 
     }
 }
