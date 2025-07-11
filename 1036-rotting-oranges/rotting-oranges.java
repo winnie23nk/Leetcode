@@ -16,7 +16,7 @@ class Solution {
         int n=grid[0].length;
         int freshcount=0;
         int count=0;
-        int time=0;
+        int t=0;
         Queue<Pair>q= new LinkedList<>();
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
@@ -33,8 +33,8 @@ class Solution {
             Pair val=q.remove();
             int row=val.first;
             int col=val.second;
-            int t=val.time;
-            time=Math.max(time,t);
+             t=val.time;
+           
             int drow[]={-1,0,1,0};
             int dcol[]={0,1,0,-1};
             for(int k=0;k<4;k++){
@@ -53,6 +53,6 @@ class Solution {
         }
 
 
-    return time;    
+    return t;    
     }
 }
