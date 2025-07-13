@@ -4,7 +4,7 @@ class Solution {
         int lsum=0;
         int rsum=0;
         int i=0;
-         int j=cardPoints.length;
+         int j=cardPoints.length-1;
        
         while(i<k){
             lsum=lsum+cardPoints[i];
@@ -12,7 +12,6 @@ class Solution {
         }
         i--;
         sum=lsum+rsum;
-        j--;
         while(j!=cardPoints.length-k-1){
             lsum=lsum-cardPoints[i--];
             rsum=rsum+cardPoints[j--];
