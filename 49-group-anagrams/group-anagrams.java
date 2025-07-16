@@ -19,8 +19,8 @@ class Solution {
             freq[idx]++;
         }
         StringBuilder sb= new StringBuilder();
+         char c='a';
         for(int i=0;i<freq.length;i++){
-            char c='a';
             sb.append(c);
             sb.append(freq[i]);
             c++;
