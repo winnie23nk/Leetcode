@@ -1,18 +1,18 @@
-import java.util.*;
 class Solution {
     public int removeElement(int[] nums, int val) {
-        ArrayList<Integer>num=new ArrayList<>();
+        ArrayList<Integer>arr=new ArrayList<>();
+        int count=0;
         for(int i=0;i<nums.length;i++){
             if(nums[i]!=val){
-                num.add(nums[i]);
+                arr.add(nums[i]);
+                count++;
             }
         }
-        for(int j=0;j<num.size();j++){
-            nums[j]=num.get(j);
+        for(int i=0;i<arr.size();i++){
+            nums[i]=arr.get(i);
         }
-       
+        
 
-        return num.size();
-       
+        return count;
     }
 }
