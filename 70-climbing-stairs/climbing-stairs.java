@@ -1,21 +1,16 @@
 class Solution {
     public int climbStairs(int n) {
-        int sum=n;
-         int mem[]=new int[n+1];
-         Arrays.fill(mem,-1);
-
-        return dp(sum,n,mem);
+        if(n<=2){
+            return n;
+        }
+        int dp[]= new int[n+1];
+        dp[1]=1;
+        dp[2]=2;
+        for(int i=3;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
+        }
+        return dp[n];
         
-    }
-    public int dp(int sum,int n,int[]mem){
-        if(sum<=2){
-            return sum;
-        }
-        if(mem[sum]!=-1){
-            return mem[sum];
-        }
-        int left=dp(sum-1,n,mem);
-        int right=dp(sum-2,n,mem);
-        return mem[sum]=left+right;
+        
     }
 }
