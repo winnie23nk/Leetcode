@@ -16,26 +16,27 @@ class Solution {
             }
 
         }
-        int mem[]= new int[temp1.length];
-        Arrays.fill(mem,-1);
-        mem[0]=temp1[0];
-        int val1=dp(temp1.length-1,temp1,mem);
-         Arrays.fill(mem,-1);
-         mem[0]=temp2[0];
-        int val2=dp(temp2.length-1,temp2,mem);
+        int val1=dp(temp1);
+        int val2=dp(temp2);
         return Math.max(val1,val2);
         
     }
-    public int dp(int idx,int nums[],int mem[]){
-        if(idx<0){
-            return 0;
+    public int dp(int nums[]){
+        if(nums.length==1){
+            return nums[0];
         }
-        if(mem[idx]!=-1){
-            return mem[idx];
+        int prev=nums[0];
+        int prev2=0;
+        int left=0;
+        int curr=0;
+        for(int i=1;i<nums.length;i++){
+            left=nums[i]+prev2;
+            int right=prev;
+            curr=Math.max(left,right);
+            prev2=prev;
+            prev=curr;
+            
         }
-             
-        int left=nums[idx]+dp(idx-2,nums,mem);
-        int right=dp(idx-1,nums,mem);
-        return mem[idx]=Math.max(left,right);
-    }
+        return curr;
+}
 }
