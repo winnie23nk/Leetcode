@@ -3,24 +3,36 @@ class Solution {
         HashMap<String,ArrayList<String>>map=new HashMap<>();
         for(int i=0;i<strs.length;i++){
             String str=strs[i];
-            char[]arr=str.toCharArray();
-            Arrays.sort(arr);
-            String key=new String(arr);
-            ArrayList<String>list=new ArrayList<>();
-            if(map.containsKey(key)){
-                list=map.get(key);
-                list.add(str);
-                map.put(key,list);
+            String val=transform(str);
+            ArrayList<String>arr=new ArrayList<>();
+            if(map.containsKey(val)){
+                arr=map.get(val);
+                arr.add(strs[i]);
+                map.put(val,arr);
             }else{
-                list.add(str);
-                map.put(key,list);
-
+                arr.add(strs[i]);
+                map.put(val,arr);
+                
             }
 
-            
+           
         }
 
 
         return new ArrayList<>(map.values());
+    }
+    String transform(String str){
+        int arr[]=new int[26];
+        for(int i=0;i<str.length();i++){
+            arr[str.charAt(i)-'a']++;
+        }
+        StringBuilder sb=new StringBuilder("");
+        char c='a';
+        for(int i=0;i<26;i++){
+            sb.append(c);
+            sb.append(arr[i]);
+
+        }
+        return sb.toString();
     }
 }
