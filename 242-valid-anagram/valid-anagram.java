@@ -20,6 +20,8 @@ class Solution {
                 else{
                      map.put(t.charAt(j),map.get(t.charAt(j))-1);
                 }
+            }else{
+                return false;
             }
 
         }
