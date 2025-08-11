@@ -2,29 +2,25 @@ class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         HashMap<String,ArrayList<String>>map=new HashMap<>();
         for(int i=0;i<strs.length;i++){
-            String val=frequencyString(strs[i]);
-            if(!map.containsKey(val)){
-                map.put(val,new ArrayList<>());
+            String str=strs[i];
+            char[]arr=str.toCharArray();
+            Arrays.sort(arr);
+            String key=new String(arr);
+            ArrayList<String>list=new ArrayList<>();
+            if(map.containsKey(key)){
+                list=map.get(key);
+                list.add(str);
+                map.put(key,list);
+            }else{
+                list.add(str);
+                map.put(key,list);
+
             }
-            map.get(val).add(strs[i]);
+
+            
         }
+
+
         return new ArrayList<>(map.values());
-        
-    }
-    public String frequencyString(String str){
-        int freq[]= new int[26];
-        char arr[]= str.toCharArray();
-        for(int i=0;i<arr.length;i++){
-            int idx=arr[i]-'a';
-            freq[idx]++;
-        }
-        StringBuilder sb= new StringBuilder();
-         char c='a';
-        for(int i=0;i<freq.length;i++){
-            sb.append(c);
-            sb.append(freq[i]);
-            c++;
-        }
-        return sb.toString();
     }
 }
