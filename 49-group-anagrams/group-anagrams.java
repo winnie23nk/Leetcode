@@ -31,6 +31,7 @@ class Solution {
         for(int i=0;i<26;i++){
             sb.append(c);
             sb.append(arr[i]);
+            c++;
 
         }
         return sb.toString();
