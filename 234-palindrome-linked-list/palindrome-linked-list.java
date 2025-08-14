@@ -16,22 +16,27 @@ class Solution {
         ListNode slow=head;
         ListNode fast=head;
         int count=0;
-        while(fast.next!=null&&fast.next.next!=null){
+        while(fast!=null&&fast.next!=null){
             slow=slow.next;
             fast=fast.next.next;
             count++;
         }
+        if(fast!=null){
+            slow=slow.next;
+        }
          ListNode last=rev(slow);
          ListNode first=head;
-        for(int i=0;i<=count;i++){
+         while(last!=null){
             if(first.val==last.val){
                 first=first.next;
                 last=last.next;
             }else{
                 return false;
             }
-        }return true;
+
+         }
         
+       return true; 
     }
     public ListNode rev(ListNode head){
         if(head==null||head.next==null){
@@ -40,6 +45,7 @@ class Solution {
         ListNode first=head;
         ListNode second=head.next;
         ListNode third=second.next;
+        first.next=null;
         while(second!=null){
             third=second.next;
             second.next=first;
