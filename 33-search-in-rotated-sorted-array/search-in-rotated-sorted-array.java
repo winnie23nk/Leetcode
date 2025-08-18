@@ -15,8 +15,12 @@ class Solution {
             return bin(nums,target,mid+1,end);
         }else{
             int val= bin(nums,target,beg,mid-1);
-            int val2=bin(nums,target,mid+1,end);
-            return Math.max(val,val2);
+            
+            if(val==-1){
+             int val2=bin(nums,target,mid+1,end);
+             return val2;
+            }
+            return val;
         }
 
          
