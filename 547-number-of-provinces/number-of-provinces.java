@@ -13,6 +13,10 @@ class Solution {
         
     }
     public void dfs(int[][] isConnected,int[]visited,int start){
+        if(visited[start]==1){
+            return;
+
+        }
         visited[start]=1;
         for(int i=0;i<isConnected[start].length;i++){
             if(visited[i]==0&&isConnected[start][i]==1){
