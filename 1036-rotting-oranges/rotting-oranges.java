@@ -1,58 +1,41 @@
-class Pair{
-    int first;
-    int second;
-    int time;
-    Pair(int first,int second,int time){
-        this.first=first;
-        this.second=second;
-        this.time=time;
-
-
-    }
-}
 class Solution {
     public int orangesRotting(int[][] grid) {
-        int m=grid.length;
-        int n=grid[0].length;
-        int freshcount=0;
-        int count=0;
-        int t=0;
-        Queue<Pair>q= new LinkedList<>();
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
+        Queue<int[]>q=new LinkedList<>();
+        int fresh=0;
+        int time=-1;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[i].length;j++){
                 if(grid[i][j]==2){
-                    q.add(new Pair(i,j,0));
-                }
-                if(grid[i][j]==1){
-                    freshcount++;
-
+                q.add(new int[]{i,j});
+                }else if(grid[i][j]==1){
+                  fresh++;
                 }
             }
         }
+        if(fresh==0)return 0;
+        int arr[][]={{0,1},{1,0},{-1,0},{0,-1}};
+        int x=0;
+        int y=0;
         while(!q.isEmpty()){
-            Pair val=q.remove();
-            int row=val.first;
-            int col=val.second;
-             t=val.time;
-           
-            int drow[]={-1,0,1,0};
-            int dcol[]={0,1,0,-1};
-            for(int k=0;k<4;k++){
-                int nrow=row+drow[k];
-                int ncol=col+dcol[k];
-                if(nrow>=0&&nrow<m&&ncol>=0&&ncol<n&&grid[nrow][ncol]==1){
-                    grid[nrow][ncol]=2;
-                    q.add(new Pair(nrow,ncol,t+1));
-                    count++;
+            time++;
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                int val[]=q.remove();
+               for(int j=0;j<arr.length;j++){
+                x=val[0]+arr[j][0];
+                y=val[1]+arr[j][1];
+                if(x>=0&&y>=0&&x<grid.length&&y<grid[0].length&&grid[x][y]==1){
+                    grid[x][y]=2;
+                    fresh--;
+                    q.add(new int[]{x,y});
                 }
+
+
+               }
             }
 
         }
-        if(count!=freshcount){
-            return -1;
-        }
-
-
-    return t;    
+     return fresh==0?time:-1;
+        
     }
 }
