@@ -1,31 +1,30 @@
 class Solution {
     public int search(int[] nums, int target) {
-        return bin(nums,target,0,nums.length-1);
-        
+    int val=find(nums,0,nums.length-1,target);
+    return val;
     }
-    public int bin(int[]nums,int target, int beg,int end){
-        if(beg>end){
-            return -1;
-        }
-        int mid=beg+(end-beg)/2;
+    public int find(int nums[],int start,int end,int target){
+        
+        while(start<=end){
+        int mid=start+(end-start)/2;
         if(nums[mid]==target){
             return mid;
         }
-        if(mid!=nums.length-1&&nums[mid+1]<=target&&target<=nums[end]){
-            return bin(nums,target,mid+1,end);
-        }else{
-            int val= bin(nums,target,beg,mid-1);
-            
-            if(val==-1){
-             int val2=bin(nums,target,mid+1,end);
-             return val2;
+        if(nums[start]<=nums[mid]){
+            if(nums[start]<=target&&target<=nums[mid]){
+                end=mid-1;
+            }else{
+                start=mid+1;
             }
-            return val;
+        }else{
+            if(nums[mid]<=target&&target<=nums[end]){
+                start=mid+1;
+            }else{
+                end=mid-1;
+            }
         }
-
-         
-        
-        
-        
+       
     }
+    return -1;
+}
 }
